@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Reels Video</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <script src="https://cdn.webrtc-experiment.com/RecordRTC.js"></script>
+  <style>
+    /* CSS animations for text */
+    @keyframes slideIn {
+      from {
+        transform: translateX(-100%);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes bounceIn {
+      0% {
+        transform: scale(0.3);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .text-slideIn {
+      animation: slideIn 1s ease-out;
+    }
+
+    .text-fadeIn {
+      animation: fadeIn 1s ease-out;
+    }
+
+    .text-bounceIn {
+      animation: bounceIn 1s ease-out;
+    }
+
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      max-width: 800px;
+    }
+    .card {
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+    }
+    .card-header {
+      background-color: #007bff;
+      color: white;
+    }
+    .canvas-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    .canvas-container canvas {
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="container my-5">
+    <h1 class="text-center mb-4">Create Video for Reels</h1>
+    <div class="card">
+      <div class="card-header text-center">
+        <h4>Upload Files and Configure Settings</h4>
+      </div>
+      <div class="card-body">
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <label for="imageUpload" class="form-label">Upload Images:</label>
+            <input type="file" id="imageUpload" accept="image/*" multiple class="form-control">
+          </div>
+          <div class="col-md-6">
+            <label for="audioUpload" class="form-label">Upload Audio:</label>
+            <input type="file" id="audioUpload" accept="audio/*" class="form-control">
+          </div>
+        </div>
+        <div id="textSettings">
+          <div class="text-item mb-4">
+            <label>Text:</label>
+            <input type="text" class="form-control text-input" placeholder="Enter text">
+            <label>Font:</label>
+            <select class="form-select font-select">
+              <option value="Arial">Arial</option>
+              <option value="Verdana">Verdana</option>
+              <option value="Courier New">Courier New</option>
+              <option value="Georgia">Georgia</option>
+            </select>
+            <label>Font Size:</label>
+            <input type="number" class="form-control font-size-input" value="60" min="20" max="200">
+            <label>Text Color:</label>
+            <input type="color" class="form-control text-color-input" value="#ffffff">
+            <label>Text Animation:</label>
+            <select class="form-select text-animation-select">
+              <option value="none">None</option>
+              <option value="text-slideIn">Slide In</option>
+              <option value="text-fadeIn">Fade In</option>
+              <option value="text-bounceIn">Bounce In</option>
+            </select>
+          </div>
+        </div>
+        <button id="addTextButton" class="btn btn-secondary mt-3">Add Another Text</button>
+        <div class="d-flex justify-content-center gap-3 mt-4">
+          <button id="generateButton" class="btn btn-primary">Generate Video</button>
+          <button id="resetButton" class="btn btn-danger">Reset</button>
+        </div>
+      </div>
+    </div>
+    <div class="canvas-container">
+      <canvas id="canvas" width="300" height="400"></canvas>
+    </div>
+    <div class="card mt-4">
+      <div class="card-header">
+        <h4>Video Preview</h4>
+      </div>
+      <div class="card-body text-center" id="previewContainer"></div>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
